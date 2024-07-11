@@ -24,7 +24,7 @@ jobs:
           prerelease: true
 
       - run: |
-          echo '${{ steps.list-releases.outputs.releases }}' | jq -r '.[]' | while read release ; do 
+          echo '${{ steps.list-releases.outputs.releases_body }}' | jq -r '.[]' | while read release ; do 
             echo "release: ${release}"
           done
 
