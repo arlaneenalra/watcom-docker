@@ -2,9 +2,9 @@ name: Build and Push a more up to date version of the Openwatcom V2 image.
 
 on:
   workflow_dispatch:
-    #  push:
-    #branches:
-    #  - master
+  push:
+    branches:
+      - master
 
 env:
   GHCR_REGISTRY: ghcr.io
