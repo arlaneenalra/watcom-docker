@@ -31,7 +31,8 @@ jobs:
           git add watcom-release-etag && git commit -m "New Open Watcom build."
           git push
 
-      - if: ${{ success() }}
-        uses: .github/workflows/build-image.yml
+      - name: Trigger build job
+        if: ${{ success() }}
+        uses: ./.github/workflows/build-image.yml
 
 
