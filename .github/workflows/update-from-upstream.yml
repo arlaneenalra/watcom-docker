@@ -18,21 +18,20 @@ jobs:
 
         # Very hackish approach to see if the image needs to be rebuilt.
       - run: |
-         curl -IL https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/ow-snapshot.tar.xz | grep etag > watcom-release-etag
+          curl -IL https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/ow-snapshot.tar.xz | grep etag > watcom-release-etag
 
       - continue-on-error: true
         run: |  
-         git config --global user.email "polling-bot@thenextbug.com"
-         git config --global user.name "polling-bot"
-         git diff --quiet 
+          git config --global user.email "polling-bot@thenextbug.com"
+          git config --global user.name "polling-bot"
+          git diff --quiet 
       
       - if: ${{ success() }}
         run: |
-         git add watcom-release-etag && git commit -m "New Open Watcom build."
-         git push
+          git add watcom-release-etag && git commit -m "New Open Watcom build."
+          git push
 
-      - call-build-image:
-          if: ${{ success() }}
-          uses: .github/workflows/build-image.yml
+      - if: ${{ success() }}
+        uses: .github/workflows/build-image.yml
 
 
