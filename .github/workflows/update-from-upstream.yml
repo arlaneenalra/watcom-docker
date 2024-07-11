@@ -17,6 +17,7 @@ jobs:
 
       - name: Pull the list of Open Watcom releases
         uses: yakubique/github-releases@v1.2
+        id: get_releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
