@@ -1,6 +1,7 @@
 name: Build and Push a more up to date version of the Openwatcom V2 image.
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches:
