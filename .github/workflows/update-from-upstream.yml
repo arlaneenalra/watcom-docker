@@ -18,7 +18,8 @@ jobs:
         # Very hackish approach to see if the image needs to be rebuilt.
       - run: |
          curl -IL https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/ow-snapshot.tar.xz | grep etag > watcom-release-etag
-         
+
+      - run: |  
          git config --global user.email "polling-bot@thenextbug.com"
          git config --global user.name "polling-bot"
 
