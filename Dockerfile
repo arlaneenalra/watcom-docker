@@ -2,7 +2,7 @@
 #
 # To build use:
 # docker build -t lapinlabs/watcom .
-FROM alpine:3.12
+FROM alpine:3.20
 MAINTAINER Chad Rempp <crempp@gmail.com>
 
 LABEL description="An OpenWatcom V2 build environment."
@@ -10,23 +10,23 @@ LABEL description="An OpenWatcom V2 build environment."
 # Setup the build environment all in one pass. This helps us to reduce image
 # size by doing cleanup in the same layer as the setup.
 RUN apk add --no-cache --update --virtual .build-deps \
-      g++ \
-      gcc \
-      git \
+      curl \
       make \
-      musl-dev \
+      xxd \
     # Build and install Watcom package
     && cd /tmp \
-    && git clone https://github.com/open-watcom/open-watcom-v2.git \
-    && cd open-watcom-v2 \
-    && echo "export OWNOBUILD=\"nt386 wgml\"" >> setvars.sh \
-    && echo "export OWGUINOBUILD=1" >> setvars.sh \
-    && ./build.sh \
-    && cp build/binbuild/* /usr/local/bin \
-    && cd / \
+    && curl -L https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/ow-snapshot.tar.xz -o current.tar.xz \
+    && mkdir /opt/watcom \
+    && cd /opt/watcom \
+    && xzcat /tmp/current.tar.xz | tar xv \
     # Clean up after ourselves (do this in the same layer)
-    && rm -rf /tmp/open-watcom-v2 \
+    && rm -rf /tmp/current.tar.xz \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/*
+
+ENV WATCOM="/opt/watcom"
+ENV PATH="$WATCOM/binl64:$WATCOM/binl:$PATH"
+ENV EDPATH="$WATCOM/eddat"
+ENV INCLUDE="$WATCOM/h"
 
 CMD ["/bin/sh"]
