@@ -2,7 +2,8 @@ name: Pull the list of Open Watcom V2 releases and update the list in repo.
 
 on:
   workflow_dispatch:
-
+  schedule:
+    - cron: 30 6 * * 6 
 
 jobs:
   pull-releases:
