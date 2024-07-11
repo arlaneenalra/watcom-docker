@@ -20,12 +20,19 @@ jobs:
       - run: |
          curl -IL https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/ow-snapshot.tar.xz | grep etag > watcom-release-etag
 
-      - run: |  
+      - continue-on-error: true
+        run: |  
          git config --global user.email "polling-bot@thenextbug.com"
          git config --global user.name "polling-bot"
-
-         git diff --quiet || (git add watcom-release-etag && git commit -m "New Open Watcom build." )
+         git diff --quiet 
+      
+      - if: ${{ success() }}
+        run: |
+         git add watcom-release-etag && git commit -m "New Open Watcom build."
          git push
 
+      - call-build-image:
+          if: ${{ success() }}
+          uses: .github/workflows/build-image.yml
 
 
