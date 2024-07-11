@@ -32,6 +32,6 @@ jobs:
           git push
   build-image:
     if: ${{ success() }}
-    uses: ./.github/workflows/build-image.yml
+    uses: ./.github/workflows/build-image.yaml
 
 
