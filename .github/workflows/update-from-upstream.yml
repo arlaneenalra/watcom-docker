@@ -15,14 +15,15 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - uses: yakubique/github-releases@v1.2
-        id: get_releases
+      - name: Pull the list of Open Watcom releases
+        uses: yakubique/github-releases@v1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repository: yakubique/orogene
-        - run: |
-            echo "${{ steps.get_releases.outputs.releases }}"
+          repository: open-watcom/open-watcom-v2
+
+      - run: |
+          echo "${{ steps.get_releases.outputs.releases }}"
 
 
 
