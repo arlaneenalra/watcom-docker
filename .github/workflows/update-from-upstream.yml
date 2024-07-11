@@ -15,17 +15,18 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Pull the list of Open Watcom releases
-        uses: yakubique/github-releases@v1.2
-        id: get_releases
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: github-actions-tools/gh-list-releases@main
+        id: list-releases
         with:
-          pre: true
-          repository: open-watcom/open-watcom-v2
+          owner: open-watcom 
+          repo: open-watcom-v2 
+          nb_results: 10
+          prerelease: true
 
       - run: |
-          echo "${{ steps.get_releases.outputs.releases }}"
+          echo '${{ steps.list-releases.outputs.releases }}' | jq -r '.[]' | while read release ; do 
+            echo "release: ${release}"
+          done
 
 
 
