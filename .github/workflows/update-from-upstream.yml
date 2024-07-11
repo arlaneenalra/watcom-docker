@@ -1,0 +1,28 @@
+name: Pull the list of Open Watcom V2 releases and update the list in repo.
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  pull-releases:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+ 
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - uses: yakubique/github-releases@v1.2
+        id: get_releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repository: yakubique/orogene
+        - run: |
+            echo "${{ steps.get_releases.outputs.releases }}"
+
+
+
