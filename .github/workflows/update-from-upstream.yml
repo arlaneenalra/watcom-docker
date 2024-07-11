@@ -24,7 +24,7 @@ jobs:
 
          git checkout master 
          git diff --quiet || (git add watcom-release-etag && git commit -m "New Open Watcom build." )
-        git push
+         git push
 
 
 
