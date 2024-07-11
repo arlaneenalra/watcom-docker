@@ -22,7 +22,6 @@ jobs:
          git config --global user.email "polling-bot@thenextbug.com"
          git config --global user.name "polling-bot"
 
-         git checkout master 
          git diff --quiet || (git add watcom-release-etag && git commit -m "New Open Watcom build." )
          git push
 
