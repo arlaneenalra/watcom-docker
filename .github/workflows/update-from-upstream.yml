@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - id: releases 
-        run: prep.py
+        run: ./prep.py
 
       - run: |  
           git config --global user.email "polling-bot@thenextbug.com"
