@@ -2,10 +2,12 @@ name: Build and Push a more up to date version of the Openwatcom V2 image.
 
 on:
   workflow_call:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
+    inputs:
+      release:
+        description: 'The release tag to build an image for.'
+        default: 'Current-build'
+        required: false
+        type: string
 
 env:
   GHCR_REGISTRY: ghcr.io
@@ -38,8 +40,8 @@ jobs:
         with:
           images: ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha
-            type=raw,latest
+            type=raw,${{ inputs.release }}
+            ${{ inputs.release == 'Current-build' && 'type=raw,latest' || '' }}
       
       - name: Build and push Docker image
         id: push
@@ -49,6 +51,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          buildArgs:
+            - RELEASE=${{ inputs.release }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
