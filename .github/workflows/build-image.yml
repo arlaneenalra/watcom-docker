@@ -51,7 +51,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          buildArgs: RELEASE=${{ inputs.release }}
+          build-args: RELEASE=${{ inputs.release }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
