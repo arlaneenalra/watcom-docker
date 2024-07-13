@@ -13,7 +13,7 @@ jobs:
       contents: write
 
     outputs:
-      toBuild: ${{ fromJson(steps.releases.outputs.to_build) }}
+      toBuild: ${{ steps.releases.outputs.to_build }}
  
     steps:
       - name: Check out the repo
@@ -35,10 +35,9 @@ jobs:
     #uses: ./.github/workflows/build-image.yml
     strategy:
       matrix:
-        toBuild: ${{ needs.pullReleases.outputs.toBuild }}
+        toBuild: ${{ fromJson(needs.pullReleases.outputs.toBuild) }}
 
     steps:
       - run: echo ${{ matrix.toBuild }}
       
-
 
