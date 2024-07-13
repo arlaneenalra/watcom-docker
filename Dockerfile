@@ -3,9 +3,10 @@
 # To build use:
 # docker build -t lapinlabs/watcom .
 FROM alpine:3.20
-MAINTAINER Chad Rempp <crempp@gmail.com>
+MAINTAINER Chris Salch <emeraldd.chris@gmail.com> 
 
 LABEL description="An OpenWatcom V2 build environment."
+ARG RELEASE="Current-build"
 
 # Setup the build environment all in one pass. This helps us to reduce image
 # size by doing cleanup in the same layer as the setup.
@@ -15,7 +16,7 @@ RUN apk add --no-cache --update --virtual .build-deps \
       xxd \
     # Build and install Watcom package
     && cd /tmp \
-    && curl -L https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/ow-snapshot.tar.xz -o current.tar.xz \
+    && curl -L https://github.com/open-watcom/open-watcom-v2/releases/download/$RELEASE/ow-snapshot.tar.xz -o current.tar.xz \
     && mkdir /opt/watcom \
     && cd /opt/watcom \
     && xzcat /tmp/current.tar.xz | tar xv \

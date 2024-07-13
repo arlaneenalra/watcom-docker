@@ -30,14 +30,11 @@ jobs:
 
   buildImage:
     needs: pullReleases
-    runs-on: ubuntu-latest
 
-    #uses: ./.github/workflows/build-image.yml
     strategy:
       matrix:
         toBuild: ${{ fromJson(needs.pullReleases.outputs.toBuild) }}
 
-    steps:
-      - run: echo ${{ matrix.toBuild }}
-      
-
+    uses: ./.github/workflows/build-image.yml
+    with:
+      release: ${{ matrix.toBuild }}
