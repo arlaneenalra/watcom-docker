@@ -17,7 +17,7 @@ CACHE_FILE="seen-releases.json"
 OUTPUT=os.environ.get('GITHUB_OUTPUT', 'out.txt')
 
 # File name for the full snapshot.
-SNAPSHOT=re.compile('ow-snapshot.tar.*')
+SNAPSHOT=re.compile('ow-snapshot.tar.xz')
 
 def find_snapshot(asset_list):
     for asset in asset_list:
