@@ -30,7 +30,7 @@ jobs:
 
   buildImage:
     needs: pullReleases
-    if: needs.pullReleases.output.toBuild != "[]"
+    if: fromJson(needs.pullReleases.output.toBuild) != []
 
     strategy:
       max-parallel: 2
