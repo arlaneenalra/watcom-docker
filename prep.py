@@ -26,6 +26,8 @@ def find_snapshot(asset_list):
             # we've seen in the past.
             return asset['updated_at']
 
+    return False
+
 def get_all_releases():
     raw_release_list=urlopen(URL).read()
     release_list=json.loads(raw_release_list)
@@ -55,7 +57,7 @@ def write_to_build(file, to_build_list):
         f.write(f"to_build={to_build}")
         
 def filter_releases(all_release_list, seen_release_list):
-    return [ k for k, v in all_release_list.items() if seen_release_list.get(k, False) != v ]
+    return [ k for k, v in all_release_list.items() if seen_release_list.get(k, False) != v and v != False ]
 
 all_release_list = get_all_releases()
 to_build_list = filter_releases(all_release_list, get_seen_releases())
