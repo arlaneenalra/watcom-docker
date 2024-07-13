@@ -30,6 +30,8 @@ jobs:
 
   buildImage:
     needs: pullReleases
+    runs-on: ubuntu-latest
+
     #uses: ./.github/workflows/build-image.yml
     strategy:
       matrix:
