@@ -12,8 +12,10 @@ ARG RELEASE="Current-build"
 # size by doing cleanup in the same layer as the setup.
 RUN apk add --no-cache --update --virtual .build-deps \
       curl \
+    && apk add --no-cache --update \
       make \
       xxd \
+      nasm \
     # Build and install Watcom package
     && cd /tmp \
     && curl -L https://github.com/open-watcom/open-watcom-v2/releases/download/$RELEASE/ow-snapshot.tar.xz -o current.tar.xz \
@@ -29,5 +31,7 @@ ENV WATCOM="/opt/watcom"
 ENV PATH="$WATCOM/binl64:$WATCOM/binl:$PATH"
 ENV EDPATH="$WATCOM/eddat"
 ENV INCLUDE="$WATCOM/h"
+
+WORKDIR /src
 
 CMD ["/bin/sh"]
