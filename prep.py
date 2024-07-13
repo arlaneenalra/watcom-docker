@@ -64,5 +64,5 @@ print("Building list:")
 PP.pprint(to_build_list)
 
 write_list(CACHE_FILE, all_release_list)
-write_list(OUTPUT, to_build_list)
+write_to_build(OUTPUT, to_build_list)
 
