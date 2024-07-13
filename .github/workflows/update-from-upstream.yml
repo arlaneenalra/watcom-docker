@@ -25,7 +25,7 @@ jobs:
       - run: |  
           git config --global user.email "polling-bot@thenextbug.com"
           git config --global user.name "polling-bot"
-          git add . && git commit -m "Updating seen release list."
+          git add . && git commit -m "Updating seen release list." || echo "Nothing to build."
           git push
 
   buildImage:
