@@ -32,6 +32,7 @@ jobs:
     needs: pullReleases
 
     strategy:
+      max-parallel: 2
       matrix:
         toBuild: ${{ fromJson(needs.pullReleases.outputs.toBuild) }}
 
