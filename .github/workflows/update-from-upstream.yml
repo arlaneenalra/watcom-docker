@@ -35,7 +35,7 @@ jobs:
     secrets: inherit
 
     strategy:
-      max-parallel: 4 
+      max-parallel: 10
       matrix:
         toBuild: ${{ fromJson(needs.pullReleases.outputs.toBuild) }}
 

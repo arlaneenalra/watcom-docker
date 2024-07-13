@@ -16,6 +16,7 @@ RUN apk add --no-cache --update --virtual .build-deps \
       make \
       xxd \
       nasm \
+      zip \
     # Build and install Watcom package
     && cd /tmp \
     && curl -L https://github.com/open-watcom/open-watcom-v2/releases/download/$RELEASE/ow-snapshot.tar.xz -o current.tar.xz \
