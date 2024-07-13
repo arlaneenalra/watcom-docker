@@ -17,10 +17,20 @@ To run in an interactive mode:
 $ docker run -it -v $(pwd):/src ghcr.io/arlaneenalra/watcom-docker sh 
 ```
 
+or
+
+```
+$ docker run -it -v $(pwd):/src arlaneenalra/watcom-docker sh 
+```
+
 To build something:
 ```
 $ echo -e '#include <stdio.h>\nvoid main() { printf("Hello World\\n"); }' > hello.c
 $ docker run --rm -v $(pwd):/src ghcr.io/arlaneenalra/watcom-docker wcl hello.c 
+
+or 
+
+$ docker run --rm -v $(pwd):/src arlaneenalra/watcom-docker wcl hello.c 
 ```
 
 # Building the Image Locally
