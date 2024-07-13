@@ -1,3 +1,5 @@
+[![Image Build](https://github.com/arlaneenalra/watcom-docker/actions/workflows/update-from-upstream.yml/badge.svg)](https://github.com/arlaneenalra/watcom-docker/actions/workflows/update-from-upstream.yml)
+
 # Watcom Docker Build Environment
 
 Forked from [crempp/watcom-docker](https://github.com/crempp/watcom-docker) which has not been updated in years.
